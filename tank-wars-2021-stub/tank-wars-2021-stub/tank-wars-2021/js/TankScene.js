@@ -8,6 +8,10 @@ class TankScene extends Phaser.Scene {
     player
     /** @type {Array.<EnemyTank>} */
     enemyTanks = []
+    /** @type {Phaser.Physics.Arcade.Group} */
+    bullets
+    /** @type {Phaser.Physics.Arcade.Group} */
+    enemyBullets
     preload() {
         this.load.atlas('tank', 'assets/tanks/tanks.png', 'assets/tanks/tanks.json')
         this.load.atlas('enemy', 'assets/tanks/enemy-tanks.png', 'assets/tanks/tanks.json')
@@ -24,6 +28,15 @@ class TankScene extends Phaser.Scene {
         this.destructLayer.setCollisionByProperty({ collides: true })
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
+        //create bullets
+        this.enemyBullets = this.physics.add.group({
+            defaultKey: 'bullet',
+            maxSize: 10
+        })
+        this.bullets = this.physics.add.group({
+            defaultKey: 'bullet',
+            maxSize: 10
+        })
         const objectLayer = this.map.getObjectLayer('objectLayer')
         let enemyObjects = []
         let actor
@@ -55,8 +68,8 @@ class TankScene extends Phaser.Scene {
         enemyTank.enableCollisions()
         this.physics.add.collider(enemyTank.hull, this.player.hull)
         this.enemyTanks.push(enemyTank)
-        if(this.enemyTanks.length > 1){
-            for(let i = 0; i < this.enemyTanks.length - 1; i++){
+        if (this.enemyTanks.length > 1) {
+            for (let i = 0; i < this.enemyTanks.length - 1; i++) {
                 this.physics.add.collider(enemyTank.hull, this.enemyTanks[i].hull)
             }
         }
