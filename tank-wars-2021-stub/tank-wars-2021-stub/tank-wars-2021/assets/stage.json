@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"level1.json"
-        }
-    },
  "height":10,
  "infinite":false,
  "layers":[
@@ -62,30 +54,6 @@
                  "width":0,
                  "x":670,
                  "y":162
-                }, 
-                {
-                 "height":0,
-                 "id":3,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"enemySpawn",
-                 "visible":true,
-                 "width":0,
-                 "x":872,
-                 "y":416
-                }, 
-                {
-                 "height":0,
-                 "id":4,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"enemySpawn",
-                 "visible":true,
-                 "width":0,
-                 "x":382.666666666667,
-                 "y":500
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -94,7 +62,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":5,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
