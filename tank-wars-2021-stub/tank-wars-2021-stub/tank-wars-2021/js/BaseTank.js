@@ -3,7 +3,7 @@ class BaseTank{
     tankspeed = 100
     /** @type {number} */
     damageMax = 2
-    /** @type {Physics.Arcade.Group} */
+    /** @type {Phaser.Physics.Arcade.Group} */
     bullets
 
     constructor(scene,x,y, texture, frame){
@@ -35,7 +35,7 @@ class BaseTank{
     burn(){
          this.turret.setVisible(false)
          this.hull.setVelocity(0)
-         this.hull.body.imovable = true
+         this.hull.body.immovable = true
     }
     isDestroyed(){
         if (this.damageCount >= this.damageMax){

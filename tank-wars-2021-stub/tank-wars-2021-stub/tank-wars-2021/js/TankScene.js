@@ -91,7 +91,7 @@ class TankScene extends Phaser.Scene {
         let enemyTank = new EnemyTank(this, dataObject.x, dataObject.y, 'enemy', 'tank1', this.player)
         enemyTank.initMovement()
         enemyTank.enableCollisions(this.destructLayer)
-        this.enemyTanks.setBullets(this.enemyBullets)
+        enemyTank.setBullets(this.enemyBullets)
         this.physics.add.collider(enemyTank.hull, this.player.hull)
         this.enemyTanks.push(enemyTank)
         if (this.enemyTanks.length > 1) {
@@ -130,8 +130,19 @@ class TankScene extends Phaser.Scene {
             }
         }
     }
-    bulletHitPlayer(){
-        
+    bulletHitPlayer(hull, bullet){
+        this.disposeOfBullet(bullet)
+        this.player.damage()
+        if(this.player.isDestroyed()){
+            this.input.enabled = false
+            this.enemyTanks = []
+            this.physics.pause()
+            let explosion = this.explosions.get(hull.x, hull.y)
+            if(explosion){
+                this.activateExplosion(explosion)
+                explosion.play('explode')
+            }
+        }
     }
     bulletHitEnemy(hull, bullet){
         /** @type {EnemyTank} */
