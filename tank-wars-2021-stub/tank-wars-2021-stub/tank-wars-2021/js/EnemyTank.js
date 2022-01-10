@@ -31,7 +31,7 @@ class EnemyTank extends BaseTank{
             }
         }
     }
-    damage(){
+    damage(targets){
         this.damageCount++
         if(this.damageCount >= this.damageMax){
             this.turret.destroy()

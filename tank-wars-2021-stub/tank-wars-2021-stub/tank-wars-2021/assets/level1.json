@@ -48,8 +48,8 @@
                  "type":"playerSpawn",
                  "visible":true,
                  "width":0,
-                 "x":518,
-                 "y":338
+                 "x":140,
+                 "y":99
                 }, 
                 {
                  "height":0,
@@ -60,8 +60,8 @@
                  "type":"enemySpawn",
                  "visible":true,
                  "width":0,
-                 "x":670,
-                 "y":162
+                 "x":821,
+                 "y":170
                 }, 
                 {
                  "height":0,
@@ -72,8 +72,8 @@
                  "type":"enemySpawn",
                  "visible":true,
                  "width":0,
-                 "x":872,
-                 "y":416
+                 "x":1096,
+                 "y":541
                 }, 
                 {
                  "height":0,
@@ -84,8 +84,56 @@
                  "type":"enemySpawn",
                  "visible":true,
                  "width":0,
-                 "x":382.666666666667,
+                 "x":382.667,
                  "y":500
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"bossSpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":2433,
+                 "y":323
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"enemySpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":1409,
+                 "y":173
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"enemySpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":2177,
+                 "y":137
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"enemySpawn",
+                 "visible":true,
+                 "width":0,
+                 "x":2177,
+                 "y":445
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -94,7 +142,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":5,
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
