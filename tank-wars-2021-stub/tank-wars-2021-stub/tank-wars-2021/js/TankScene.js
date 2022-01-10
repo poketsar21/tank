@@ -68,7 +68,7 @@ class TankScene extends Phaser.Scene {
         })
         this.anims.create({
             key: 'explode',
-            frames: this.anims.generateFrameNumbers('explode', {
+            frames: this.anims.generateFrameNumbers('explosion', {
                 start: 0,
                 end: 23,
                 first: 23
@@ -90,7 +90,8 @@ class TankScene extends Phaser.Scene {
     createEnemy(dataObject) {
         let enemyTank = new EnemyTank(this, dataObject.x, dataObject.y, 'enemy', 'tank1', this.player)
         enemyTank.initMovement()
-        enemyTank.enableCollisions()
+        enemyTank.enableCollisions(this.destructLayer)
+        this.enemyTanks.setBullets(this.enemyBullets)
         this.physics.add.collider(enemyTank.hull, this.player.hull)
         this.enemyTanks.push(enemyTank)
         if (this.enemyTanks.length > 1) {
@@ -122,12 +123,15 @@ class TankScene extends Phaser.Scene {
         this.physics.velocityFromRotation(bullet.rotation, 500, bullet.body.velocity)
         this.physics.add.collider(bullet, this.destructLayer, this.damageWall, null, this)
         if(target === this.player){
-
+            this.physics.add.overlap(this.player.hull, bullet, this.bulletHitPlayer, null, this)
         }else{
             for(let i = 0; i < this.enemyTanks.length; i++){
                 this.physics.add.overlap(this.enemyTanks[i].hull, bullet, this.bulletHitEnemy, null, this)
             }
         }
+    }
+    bulletHitPlayer(){
+        
     }
     bulletHitEnemy(hull, bullet){
         /** @type {EnemyTank} */
@@ -135,11 +139,15 @@ class TankScene extends Phaser.Scene {
         /** @type {number} */
         let index
         for (let i = 0; i < this.enemyTanks.length; i++) {
-            if(this.enemyTanks[i].hull === hull)
-            index = i
-            break
+            if(this.enemyTanks[i].hull === hull){
+                index = i
+                enemy = this.enemyTanks[i]
+                break
+            }
+            
         }
         this.disposeOfBullet(bullet)
+        console.log(enemy)
         enemy.damage()
         if(enemy.isImomobilised()){
             let explosion = this.explosions.get(hull.x, hull.y)

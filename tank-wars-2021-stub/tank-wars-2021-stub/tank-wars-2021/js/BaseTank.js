@@ -3,6 +3,9 @@ class BaseTank{
     tankspeed = 100
     /** @type {number} */
     damageMax = 2
+    /** @type {Physics.Arcade.Group} */
+    bullets
+
     constructor(scene,x,y, texture, frame){
         this.scene = scene
         this.shadow = this.scene.add.image(x,y, texture, 'shadow')
@@ -26,8 +29,8 @@ class BaseTank{
     damage(){
 
     }
-    setBullets(){
-
+    setBullets(bullets){
+        this.bullets = bullets
     }
     burn(){
          this.turret.setVisible(false)
@@ -40,7 +43,7 @@ class BaseTank{
         }
     }
     isImomobilised(){
-        if(this.damageCount >= this.damageMax-1){
+        if(this.damageCount >= this.damageMax - 1){
             return true
         }
     }
