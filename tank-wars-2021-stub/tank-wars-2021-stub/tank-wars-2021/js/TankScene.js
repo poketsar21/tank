@@ -21,6 +21,8 @@ class TankScene extends Phaser.Scene {
     targetText
     /** @type {number} */
     targets = 7
+    /** @type {Phaser.GameObjects.Text} */
+    fuelText
     preload() {
         this.load.atlas('tank', 'assets/tanks/tanks.png', 'assets/tanks/tanks.json')
         this.load.atlas('enemy', 'assets/tanks/enemy-tanks.png', 'assets/tanks/tanks.json')
@@ -96,12 +98,24 @@ class TankScene extends Phaser.Scene {
             color:'#FFF',
             fontFamily:'Century Gothic, sans-serif'
           }).setScrollFactor(0, 0)
-          
+          this.fuelText = this.add.text(350, 20, 'fuel: '+this.player.fuel,{
+            fontSize:'44px',
+            color:'#FFF',
+            fontFamily:'Century Gothic, sans-serif'
+          }).setScrollFactor(0, 0)
+          this.healthText.setDepth(6)
+          this.targetText.setDepth(6)
+          this.fuelText.setDepth(6)
+
     }
     update(time, delta) {
         this.player.update()
         for (let i = 0; i < this.enemyTanks.length; i++) {
             this.enemyTanks[i].update(time, delta)
+        }
+        this.fuelText.setText('fuel: '+this.player.fuel)
+        if( this.player.fuel <= 0){
+            this.fuelText.setText('fuel: '+0)
         }
         
     }
