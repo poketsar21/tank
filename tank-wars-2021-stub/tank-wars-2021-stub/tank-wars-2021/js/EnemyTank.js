@@ -15,4 +15,13 @@ class EnemyTank extends BaseTank{
         super.update()
         this.turret.rotation = Phaser.Math.Angle.Between(this.hull.x, this.hull.y, this.player.hull.x, this.player.hull.y)
     }
+    damage(){
+        this.damageCount++
+        if(this.damageCount >= this.damageMax){
+            this.turret.destroy()
+            this.hull.destroy()
+        }else if(this.damageCount == this.damageMax - 1){
+            this.burn
+        }
+    }
 }

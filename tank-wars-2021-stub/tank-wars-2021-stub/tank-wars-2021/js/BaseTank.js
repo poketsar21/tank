@@ -30,10 +30,19 @@ class BaseTank{
 
     }
     burn(){
-
+         this.turret.setVisible(false)
+         this.hull.setVelocity(0)
+         this.hull.body.imovable = true
     }
-    destroyed(){
-
+    isDestroyed(){
+        if (this.damageCount >= this.damageMax){
+            return true
+        }
+    }
+    isImomobilised(){
+        if(this.damageCount >= this.damageMax-1){
+            return true
+        }
     }
     enableCollisions(destructLayer){
         this.scene.physics.add.collider(this.hull, destructLayer)
