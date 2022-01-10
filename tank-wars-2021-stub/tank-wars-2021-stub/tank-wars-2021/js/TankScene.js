@@ -23,6 +23,10 @@ class TankScene extends Phaser.Scene {
     targets = 7
     /** @type {Phaser.GameObjects.Text} */
     fuelText
+    /** @type {Phaser.GameObjects.Group} */
+    fuelCanister
+    /** @type {Phaser.GameObjects.Group} */
+    ammoSet
     preload() {
         this.load.atlas('tank', 'assets/tanks/tanks.png', 'assets/tanks/tanks.json')
         this.load.atlas('enemy', 'assets/tanks/enemy-tanks.png', 'assets/tanks/tanks.json')
@@ -53,6 +57,12 @@ class TankScene extends Phaser.Scene {
         this.bullets = this.physics.add.group({
             defaultKey: 'bullet',
             maxSize: 10
+        })
+        this.fuelCanister = this.add.group({
+            defaultKey: 'fuelCanister'
+        })
+        this.ammoSet = this.add.group({
+            defaultKey: 'ammoSet'
         })
         const objectLayer = this.map.getObjectLayer('objectLayer')
         let enemyObjects = []
@@ -239,5 +249,8 @@ class TankScene extends Phaser.Scene {
     }
     animComplete(animation, frame, gameObject){
         this.explosions.killAndHide(gameObject)
+    }
+    refill(fuel){
+        this.player.fuel + 500
     }
 }
