@@ -2,7 +2,7 @@
 class TankScene extends Phaser.Scene {
     /** @type {Phaser.Tilemaps.Tilemap} */
     map
-    /** @type {Phaser.Tilemaps.TilemapLayer*/
+    /** @type {Phaser.Tilemaps.TilemapLayer} */
     destructLayer
     /** @type {PlayerTank} */
     player
@@ -49,6 +49,7 @@ class TankScene extends Phaser.Scene {
         this.destructLayer.setCollisionByProperty({ collides: true })
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
+
         //create bullets
         this.enemyBullets = this.physics.add.group({
             defaultKey: 'bullet',
@@ -116,6 +117,8 @@ class TankScene extends Phaser.Scene {
           this.healthText.setDepth(6)
           this.targetText.setDepth(6)
           this.fuelText.setDepth(6)
+          this.physics.add.overlap(this.player.hull, this.fuelCanister, this.refill, null, this)
+
 
     }
     update(time, delta) {
