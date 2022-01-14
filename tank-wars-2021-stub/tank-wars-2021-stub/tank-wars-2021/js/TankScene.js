@@ -223,9 +223,10 @@ class TankScene extends Phaser.Scene {
                 this.targets--
                 console.log(this.enemyTanks.length)
                 this.targetText.setText('targets: '+this.targets)
-                this.fuelCanisters.create(enemy.hull.x, enemy.hull.y, 'fuel')
+                // this.fuelCanisters.create(enemy.hull.x, enemy.hull.y, 'fuel')
+                let fuelCanister = this.physics.add.sprite(enemy.hull.x, enemy.hull.y,'fuel').setDepth(2)
                 this.fuelCanisters.setDepth(2)
-                this.physics.add.overlap(this.player.hull, this.fuelCanisters, this.refill, null, this)
+                this.physics.add.overlap(this.player.hull, fuelCanister, this.refill, null, this)
             }
         }
     }
@@ -254,10 +255,10 @@ class TankScene extends Phaser.Scene {
     animComplete(animation, frame, gameObject){
         this.explosions.killAndHide(gameObject)
     }
-    refill(fuel){
-        this.player.fuel + 500
-        this.fuelCanisters.destroy
-        this.fuelText.setText('fuel: '+this.player.fuel)
+    refill(hull, fuelCanister){
         console.log('refill')
+        this.player.fuel +=500
+        this.fuelText.setText('fuel: '+this.player.fuel)
+        fuelCanister.destroy()
     }
 }
