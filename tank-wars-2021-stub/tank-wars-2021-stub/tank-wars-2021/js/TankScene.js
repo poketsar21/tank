@@ -24,15 +24,16 @@ class TankScene extends Phaser.Scene {
     /** @type {Phaser.GameObjects.Text} */
     fuelText
     /** @type {Phaser.GameObjects.Group} */
-    fuelCanister
+    fuelCanisters
     /** @type {Phaser.GameObjects.Group} */
-    ammoSet
+    ammoSets
     preload() {
         this.load.atlas('tank', 'assets/tanks/tanks.png', 'assets/tanks/tanks.json')
         this.load.atlas('enemy', 'assets/tanks/enemy-tanks.png', 'assets/tanks/tanks.json')
         this.load.atlas('boss', 'assets/tanks/boss-tanks.png', 'assets/tanks/tanks.json')
         this.load.image('Tileset', 'assets/tanks/landscape-tileset.png')
         this.load.image('bullet', 'assets/tanks/bullet.png')
+        this.load.image('fuel', 'assets/tanks/fuel.png')
         this.load.spritesheet('explosion', 'assets/tanks/explosion.png',{
             frameWidth: 64,
             frameHeight: 64
@@ -49,7 +50,6 @@ class TankScene extends Phaser.Scene {
         this.destructLayer.setCollisionByProperty({ collides: true })
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
-
         //create bullets
         this.enemyBullets = this.physics.add.group({
             defaultKey: 'bullet',
@@ -59,10 +59,10 @@ class TankScene extends Phaser.Scene {
             defaultKey: 'bullet',
             maxSize: 10
         })
-        this.fuelCanister = this.add.group({
+        this.fuelCanisters = this.add.group({
             defaultKey: 'fuelCanister'
         })
-        this.ammoSet = this.add.group({
+        this.ammoSets = this.add.group({
             defaultKey: 'ammoSet'
         })
         const objectLayer = this.map.getObjectLayer('objectLayer')
@@ -117,7 +117,6 @@ class TankScene extends Phaser.Scene {
           this.healthText.setDepth(6)
           this.targetText.setDepth(6)
           this.fuelText.setDepth(6)
-          this.physics.add.overlap(this.player.hull, this.fuelCanister, this.refill, null, this)
 
 
     }
@@ -130,7 +129,6 @@ class TankScene extends Phaser.Scene {
         if( this.player.fuel <= 0){
             this.fuelText.setText('fuel: '+0)
         }
-        
     }
     createEnemy(dataObject) {
         let enemyTank
@@ -163,6 +161,7 @@ class TankScene extends Phaser.Scene {
             this.fireBullet(bullet, this.player.turret.rotation, this.enemyTanks)
         }
         
+
     }
     fireBullet(bullet, rotation,target){
         // bullet is a sprite
@@ -224,7 +223,9 @@ class TankScene extends Phaser.Scene {
                 this.targets--
                 console.log(this.enemyTanks.length)
                 this.targetText.setText('targets: '+this.targets)
-
+                this.fuelCanisters.create(enemy.hull.x, enemy.hull.y, 'fuel')
+                this.fuelCanisters.setDepth(2)
+                this.physics.add.overlap(this.player.hull, this.fuelCanisters, this.refill, null, this)
             }
         }
     }
@@ -255,5 +256,8 @@ class TankScene extends Phaser.Scene {
     }
     refill(fuel){
         this.player.fuel + 500
+        this.fuelCanisters.destroy
+        this.fuelText.setText('fuel: '+this.player.fuel)
+        console.log('refill')
     }
 }

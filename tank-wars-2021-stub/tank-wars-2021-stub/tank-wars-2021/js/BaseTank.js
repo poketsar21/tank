@@ -12,7 +12,7 @@ class BaseTank{
         this.shadow.setDepth(1)
         this.hull = this.scene.physics.add.sprite(x,y, texture, frame)
         this.hull.setSize(this.hull.width - 8, this.hull.height - 8)
-        this.hull.setDepth(2)
+        this.hull.setDepth(3)
         this.hull.body.collideWorldBounds = true
         this.hull.body.bounce.setTo(1, 1)
         this.turret = this.scene.physics.add.sprite(x,y, texture, 'turret')
