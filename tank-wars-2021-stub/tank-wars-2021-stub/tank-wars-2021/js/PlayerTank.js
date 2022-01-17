@@ -1,6 +1,7 @@
 class PlayerTank extends BaseTank {
     /** @type {number}*/
     fuel = 3000
+    // fuel = 300
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame)
         this.cursors = scene.input.keyboard.createCursorKeys()
@@ -18,12 +19,12 @@ class PlayerTank extends BaseTank {
         if (this. fuel >= 1) {
             if (this.keys.w.isDown) {
                 if (this.currentSpeed < this.tankspeed) {
-                    this.currentSpeed += 10
+                    this.currentSpeed += 1
                 }
             }
             else if (this.keys.s.isDown) {
                 if (this.currentSpeed > -this.tankspeed) {
-                    this.currentSpeed -= 10
+                    this.currentSpeed -= 1
                 }
             }
             else {
@@ -45,6 +46,9 @@ class PlayerTank extends BaseTank {
             }
         }else if(this.fuel <= 0){
             this.currentSpeed *= 0.5
+        }
+        if (this.currentSpeed < 0.1 && this.currentSpeed > -0.1) {
+            this.currentSpeed = 0
         }
         if (this.currentSpeed >= 1) {
             this.fuel--

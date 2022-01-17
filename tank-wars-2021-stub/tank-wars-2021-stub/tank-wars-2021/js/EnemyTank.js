@@ -18,7 +18,8 @@ class EnemyTank extends BaseTank{
     update(time, delta){
         super.update()
         this.turret.rotation = Phaser.Math.Angle.Between(this.hull.x, this.hull.y, this.player.hull.x, this.player.hull.y)
-        if(this.damageCount <= this.damageMax -2 && Phaser.Math.Distance.Between(this.hull.x, this.hull.y, this.player.hull.x, this.player.hull.y) < 300){
+        if(this.damageCount <= this.damageMax -2 && Phaser.Math.Distance.Between
+        (this.hull.x, this.hull.y, this.player.hull.x, this.player.hull.y) < 300){
             //within range and tank not disabled
             if(this.nextShot > time){
                 // wait to take shot
