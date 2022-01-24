@@ -147,7 +147,7 @@ class TankScene extends Phaser.Scene {
         }).setScrollFactor(0, 0)
         this.speedText = this.add.text(233, 540, '' + this.player.currentSpeed, {
             fontSize: '34px',
-            color: '#FFF',
+            color: '#000000',
             fontFamily: 'Century Gothic, sans-serif'
         }).setScrollFactor(0, 0)
         /*this.fuelText = this.add.text(350, 20, 'fuel: ' + this.player.fuel, {
